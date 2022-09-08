@@ -1,0 +1,27 @@
+{
+    "main": "dist/livewire.js",
+    "name": "laravel-livewire",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "author": "Erik Sadewater",
+    "license": "MIT",
+    "devDependencies": {
+        "autoprefixer": "^10.4",
+        "lodash": "^4.17",
+        "postcss": "^8.4",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.54",
+        "sass-loader": "^12.6.0"
+    },
+    "dependencies": {
+        "@googlemaps/markerclusterer": "^2.0.10",
+        "laravel-mix": "^6.0"
+    }
+}

@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "esadewater/livewire-maps",
+    "description": "This is my package livewire-maps",
     "keywords": [
-        ":vendor_name",
+        "esadewater",
         "laravel",
-        ":package_slug"
+        "livewire-maps"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/esadewater/livewire-maps",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Erik Sadewater",
+            "email": "erik@sadewater.com",
             "role": "Developer"
         }
     ],
@@ -30,18 +30,17 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "spatie/laravel-ray": "^1.26"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "ESadewater\\LivewireMaps\\": "src",
+            "ESadewater\\LivewireMaps\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "ESadewater\\LivewireMaps\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -51,15 +50,19 @@
         "format": "vendor/bin/pint"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "ESadewater\\LivewireMaps\\LivewireMapsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LivewireMaps": "ESadewater\\LivewireMaps\\Facades\\LivewireMaps"
             }
         }
     },

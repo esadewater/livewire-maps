@@ -3,7 +3,9 @@ FROM php:8.1-fpm
 ARG NODE_VERSION=16
 
 # Install system dependencies
-RUN apt-get update
+RUN apt-get update \
+  && apt-get install -y git \
+  && apt-get install -y libzip-dev libnotify-bin libpng-dev libjpeg62-turbo-dev unzip
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

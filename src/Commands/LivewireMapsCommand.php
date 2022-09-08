@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace ESadewater\LivewireMaps\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LivewireMapsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'livewire-maps';
 
     public $description = 'My command';
 
