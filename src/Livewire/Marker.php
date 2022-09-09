@@ -6,7 +6,9 @@ use JsonSerializable;
 
 class Marker implements JsonSerializable
 {
-    public float $lat, $lng;
+    public float $lat;
+
+    public float $lng;
 
     public function __construct()
     {
@@ -20,7 +22,7 @@ class Marker implements JsonSerializable
 
         $properties['position'] = [
             'lat' => $this->lat,
-            'lng' => $this->lng
+            'lng' => $this->lng,
         ];
         unset($properties['lat'], $properties['lng']);
 

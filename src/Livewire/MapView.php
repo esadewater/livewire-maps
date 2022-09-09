@@ -16,12 +16,17 @@ class MapView extends Component
     public Collection $features;
 
     public float $centerLat;
+
     public float $centerLng;
+
     public int $zoom;
 
     public float $neLat;
+
     public float $neLng;
+
     public float $swLat;
+
     public float $swLng;
 
     /**

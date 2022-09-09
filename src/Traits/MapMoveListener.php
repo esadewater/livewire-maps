@@ -15,12 +15,12 @@ trait MapMoveListener
     }
 
     /**
-     * @param float $centerLat
-     * @param float $centerLng
-     * @param float $neLat
-     * @param float $neLng
-     * @param float $swLat
-     * @param float $swLng
+     * @param  float  $centerLat
+     * @param  float  $centerLng
+     * @param  float  $neLat
+     * @param  float  $neLng
+     * @param  float  $swLat
+     * @param  float  $swLng
      * @return void
      */
     public function onMapMoved(float $centerLat, float $centerLng, float $neLat, float $neLng, float $swLat, float $swLng): void
@@ -30,8 +30,8 @@ trait MapMoveListener
     }
 
     /**
-     * @param float $lat
-     * @param float $lng
+     * @param  float  $lat
+     * @param  float  $lng
      * @return void
      */
     public function onCenterChanged(float $lat, float $lng): void
@@ -39,10 +39,10 @@ trait MapMoveListener
     }
 
     /**
-     * @param float $neLat
-     * @param float $neLng
-     * @param float $swLat
-     * @param float $swLng
+     * @param  float  $neLat
+     * @param  float  $neLng
+     * @param  float  $swLat
+     * @param  float  $swLng
      * @return void
      */
     public function onBoundsChanged(float $neLat, float $neLng, float $swLat, float $swLng): void
