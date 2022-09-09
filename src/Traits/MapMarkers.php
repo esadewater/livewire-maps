@@ -20,7 +20,7 @@ trait MapMarkers
     }
 
     /**
-     * @param Collection $markers
+     * @param  Collection  $markers
      * @return void
      */
     public function setMarkers(Collection $markers): void
