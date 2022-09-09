@@ -2,9 +2,19 @@
 
 namespace ESadewater\LivewireMaps\Traits;
 
+use Illuminate\Support\Collection;
+
 trait MapMarkers
 {
-    public bool $hasMapMarkers = true;
+    public Collection $markers;
+
+    /**
+     * @return void
+     */
+    public function bootMapMarkers(): void
+    {
+        $this->features->push('hasMapMarkers');
+    }
 
     /**
      * @param string $markerId

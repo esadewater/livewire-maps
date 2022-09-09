@@ -23,8 +23,6 @@ export default class Map {
     }
 
     loadFeatures() {
-        console.log('Load features');
-
         if (MapMarkers.isFeatureEnabled(this.component)) {
             new MapMarkers(this.component, this.map);
         }
@@ -32,7 +30,5 @@ export default class Map {
         if (MapMoveListener.isFeatureEnabled(this.component)) {
             new MapMoveListener(this.component, this.map)
         }
-
-        console.log('Finished loading features');
     }
 }

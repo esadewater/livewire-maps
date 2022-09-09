@@ -1,34 +1,25 @@
-import {throttle} from "lodash/function";
 import Feature from "../Feature";
+import {throttle} from "lodash/function";
 
-export default class MapMoveListener extends Feature{
-
-    LIMIT_RATE = 1000;
+export default class MapMoveListener extends Feature {
 
     constructor(component, map) {
         super(component, map);
 
-        console.log('Loaded Move Listener')
-
-        map.addListener('center_changed', this.onCenterMove.bind(this));
-        map.addListener('bounds_changed', this.onBoundsMove.bind(this))
+        this.rateLimit = parseInt(this.component.rateLimit);
+        map.addListener('bounds_changed', throttle(this.onMapMoved.bind(this), this.rateLimit));
     }
 
-    static isFeatureEnabled(component) {
-        return component.hasMapMoveListener;
+    static getFeatureName() {
+        return 'hasMapMoveListener';
     }
 
-    onCenterMove = throttle(function () {
+    onMapMoved() {
         const center = this.map.getCenter();
-
-        this.liveWireComponent.onCenterChanged(center.lat(), center.lng());
-    }, this.LIMIT_RATE);
-
-    onBoundsMove = throttle(function () {
         const bounds = this.map.getBounds()
         const northEast = bounds.getNorthEast();
         const southWest = bounds.getSouthWest();
 
-        this.liveWireComponent.onBoundsChanged(northEast.lat(), northEast.lng(), southWest.lat(), southWest.lng());
-    }, this.LIMIT_RATE);
+        this.component.onMapMoved(center.lat(), center.lng(), northEast.lat(), northEast.lng(), southWest.lat(), southWest.lng());
+    }
 }

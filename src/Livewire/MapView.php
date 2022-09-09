@@ -11,16 +11,26 @@ use Livewire\Component;
 class MapView extends Component
 {
     use MapMoveListener;
-    use MapMarkers;
+    //use MapMarkers;
 
-    // Center
+    public Collection $features;
+
     public float $centerLat;
     public float $centerLng;
-
-    // Rest
     public int $zoom;
-    public string $class;
-    public Collection $markers;
+
+    public float $neLat;
+    public float $neLng;
+    public float $swLat;
+    public float $swLng;
+
+    /**
+     * @return void
+     */
+    public function boot(): void
+    {
+        $this->features = Collection::empty();
+    }
 
     /**
      * @return View

@@ -2,17 +2,32 @@
 
 namespace ESadewater\LivewireMaps\Traits;
 
-use ESadewater\LivewireMaps\Livewire\Marker;
-
 trait MapMoveListener
 {
-    public bool $hasMapMoveListener = true;
+    public int $rateLimit = 1000;
 
-    // Bounds
-    public float $neLat;
-    public float $neLng;
-    public float $swLat;
-    public float $swLng;
+    /**
+     * @return void
+     */
+    public function bootMapMoveListener(): void
+    {
+        $this->features->push('hasMapMoveListener');
+    }
+
+    /**
+     * @param float $centerLat
+     * @param float $centerLng
+     * @param float $neLat
+     * @param float $neLng
+     * @param float $swLat
+     * @param float $swLng
+     * @return void
+     */
+    public function onMapMoved(float $centerLat, float $centerLng, float $neLat, float $neLng, float $swLat, float $swLng): void
+    {
+        $this->onCenterChanged($centerLat, $centerLng);
+        $this->onBoundsChanged($neLat, $neLng, $swLat, $swLng);
+    }
 
     /**
      * @param float $lat
@@ -21,8 +36,6 @@ trait MapMoveListener
      */
     public function onCenterChanged(float $lat, float $lng): void
     {
-        $this->centerLat = $lat;
-        $this->centerLng = $lng;
     }
 
     /**
@@ -34,15 +47,5 @@ trait MapMoveListener
      */
     public function onBoundsChanged(float $neLat, float $neLng, float $swLat, float $swLng): void
     {
-        $this->neLat = $neLat;
-        $this->neLng = $neLng;
-        $this->swLat = $swLat;
-        $this->swLng = $swLng;
-
-        $this->markers = collect([
-            new Marker(),
-            new Marker()
-        ]);
-        $this->emit('updatedMarkers');
     }
 }

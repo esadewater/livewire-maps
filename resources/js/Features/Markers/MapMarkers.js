@@ -11,8 +11,8 @@ export default class MapMarkers extends Feature {
         this.component.on('updatedMarkers', this.onUpdateMarkers.bind(this));
     }
 
-    static isFeatureEnabled(component) {
-        return component.hasMapMarkers;
+    static getFeatureName() {
+        return 'hasMapMarkers';
     }
 
     onUpdateMarkers = function() {

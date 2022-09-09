@@ -4,7 +4,11 @@ export default class Feature {
         this.map = map;
     }
 
+    static getFeatureName() {
+        return '';
+    }
+
     static isFeatureEnabled(component) {
-        return false;
+        return component.features.includes(this.getFeatureName());
     }
 }
