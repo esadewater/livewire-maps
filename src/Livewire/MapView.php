@@ -2,8 +2,6 @@
 
 namespace ESadewater\LivewireMaps\Livewire;
 
-use ESadewater\LivewireMaps\Traits\MapMarkers;
-use ESadewater\LivewireMaps\Traits\MapMoveListener;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
