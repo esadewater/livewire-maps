@@ -25,7 +25,6 @@ export function init() {
 
     function createMap(component) {
         const targetElement = component.el.getElementsByTagName('div')[0];
-        console.log(targetElement)
         new Map(component.$wire, targetElement)
     }
 }
