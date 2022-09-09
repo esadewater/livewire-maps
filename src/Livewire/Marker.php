@@ -7,6 +7,7 @@ use JsonSerializable;
 class Marker implements JsonSerializable
 {
     public float $lat;
+
     public float $lng;
 
     public mixed $payload;

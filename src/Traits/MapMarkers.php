@@ -2,7 +2,6 @@
 
 namespace ESadewater\LivewireMaps\Traits;
 
-use ESadewater\LivewireMaps\Livewire\Marker;
 use Illuminate\Support\Collection;
 
 trait MapMarkers
@@ -31,7 +30,7 @@ trait MapMarkers
     }
 
     /**
-     * @param mixed $payload
+     * @param  mixed  $payload
      * @return void
      */
     public function onMarkerClick(mixed $payload): void
