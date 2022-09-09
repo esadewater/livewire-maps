@@ -26,7 +26,7 @@ trait MapMarkers
     }
 
     /**
-     * @param string $markerId
+     * @param  string  $markerId
      * @return void
      */
     public function onMarkerClick(string $markerId): void
