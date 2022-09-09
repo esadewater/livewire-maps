@@ -1,11 +1,10 @@
-import Marker from "./Features/Markers/Marker";
 import MapMarkers from "./Features/Markers/MapMarkers";
 import MapMoveListener from "./Features/MoveListener/MapMoveListener";
 
 export default class Map {
 
     constructor(component) {
-        this.component = component;
+        this.component = component.$wire;
         this.map = this.initMap(component.el);
         this.loadFeatures();
     }
@@ -25,7 +24,7 @@ export default class Map {
 
     loadFeatures() {
         console.log('Load features');
-        console.log(this.component);
+        console.log(this.component)
 
         if (MapMarkers.isFeatureEnabled(this.component)) {
             new MapMarkers(this.component, this.map);

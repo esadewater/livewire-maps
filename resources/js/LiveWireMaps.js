@@ -16,10 +16,9 @@ export function init() {
     }
 
     Livewire.hook(LIVEWIRE_COMPONENT_LOAD_EVENT, (component) => {
-
-        if (GOOGLE_MAPS_LOADED)
+        if (GOOGLE_MAPS_LOADED) {
             new Map(component);
-        else {
+        } else {
             document.addEventListener(GOOGLE_MAPS_LOAD_EVENT, function () {
                 new Map(component);
             })
