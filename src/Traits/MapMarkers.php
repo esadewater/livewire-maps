@@ -18,20 +18,13 @@ trait MapMarkers
     {
         $this->features->push('hasMapMarkers');
         $this->markers = Collection::empty();
-
-        $this->markers->push(
-            new Marker(),
-            new Marker(),
-            new Marker()
-        );
     }
 
     /**
-     * @param  string  $markerId
+     * @param mixed $payload
      * @return void
      */
-    public function onMarkerClick(string $markerId): void
+    public function onMarkerClick(mixed $payload): void
     {
-        dd($markerId);
     }
 }

@@ -1,13 +1,10 @@
 export default class Marker {
-    constructor(map, liveWireComponent, properties) {
+    constructor(map, component, properties) {
         this.mapMarker = this.initMarker(map, properties);
-        this.liveWireComponent = liveWireComponent;
+        this.component = component;
+        this.payload = properties.payload;
 
-        /*marker.addListener("click", () => {
-            const event = new Event('markerClick');
-            event.markerId = positionMarker.project_id;
-            clickListener(event);
-        });*/
+        this.mapMarker.addListener("click", this.onMarkerClick.bind(this));
     }
 
     initMarker(map, properties) {
@@ -23,7 +20,7 @@ export default class Marker {
     }
 
     onMarkerClick = function () {
-
+        this.component.onMarkerClick(this.payload)
     }
 
     getMapMarker() {

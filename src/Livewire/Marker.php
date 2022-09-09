@@ -7,16 +7,19 @@ use JsonSerializable;
 class Marker implements JsonSerializable
 {
     public float $lat;
-
     public float $lng;
 
-    public function __construct()
+    public mixed $payload;
+
+    public function __construct(mixed $payload = '')
     {
         $this->lat = rand(0, 50);
         $this->lng = rand(0, 50);
+
+        $this->payload = $payload;
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         $properties = get_object_vars($this);
 
