@@ -21,6 +21,16 @@ trait MapMarkers
     }
 
     /**
+     * @param Collection $markers
+     * @return void
+     */
+    public function setMarkers(Collection $markers): void
+    {
+        $this->markers = $markers;
+        $this->emitSelf('updatedMarkers');
+    }
+
+    /**
      * @param mixed $payload
      * @return void
      */

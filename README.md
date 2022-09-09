@@ -1,19 +1,8 @@
 # This is my package livewire-maps
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/esadewater/livewire-maps.svg?style=flat-square)](https://packagist.org/packages/esadewater/livewire-maps)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/esadewater/livewire-maps/run-tests?label=tests)](https://github.com/esadewater/livewire-maps/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/esadewater/livewire-maps/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/esadewater/livewire-maps/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/esadewater/livewire-maps.svg?style=flat-square)](https://packagist.org/packages/esadewater/livewire-maps)
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/livewire-maps.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/livewire-maps)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Basic Google Maps-implementation for Laravel-Livewire currently supporting:
+- Map-Markers
+- Map-Move-Listeners
 
 ## Installation
 
@@ -27,6 +16,13 @@ You can publish the assets with:
 
 ```bash
 php artisan vendor:publish --tag="livewire-maps-assets"
+```
+
+Alternatively you can include the JavaScript resources in your app.js:
+
+```javascript
+const {init} = require("../../packages/livewire-maps/resources/js/LiveWireMaps");
+init();
 ```
 
 You can publish the config file with:
@@ -43,9 +39,86 @@ php artisan vendor:publish --tag="livewire-maps-views"
 
 ## Usage
 
-```php
-//TODO
+Get an API-key for the Google Maps Platform from [here](https://console.cloud.google.com/google/maps-apis/start) and add it to your .env-file:
+
+```dotenv
+GOOGLE_MAPS_API_KEY=YOUR_KEY_GOES_HERE
 ```
+
+Add the following directive right after @livewireScripts:
+
+```php
+@livewireMapsScripts
+```
+
+Then you are ready to start with a basic map with a center point and a zoom:
+
+```php
+<livewire:map-view center-lat="52.004021" center-lng="7.710472" zoom="3" style="100vh" />
+```
+
+### Map-Markers
+
+To add markers to your map you need to extend the MapView-component and add the MapMarkers-trait:
+
+```php
+class MyMapView extends ESadewater\LivewireMaps\Livewire\MapView {
+    use \ESadewater\LivewireMaps\Traits\MapMarkers;
+}
+```
+
+Your markers must be or extend the Marker-class which holds the position and a payload. Markers may be set to the map through the variable "$markers":
+
+```php
+<livewire:map-view :markers="$markers" style="100vh" />
+```
+
+They can be updated through the function "setMarkers($markers)"
+
+```php
+$mapView->setMarkers($markers)
+```
+
+Click-events on markers can be retrieved by overriding the "onMarkerClick"-function of your MapView:
+
+```php
+public function onMarkerClick(mixed $payload): void
+{
+    dd($payload)
+}
+```
+
+Clustering of markers is enabled by default bit can be disabled by setting the variable "enableClustering" to false on your MapView:
+
+```php
+public bool $enableClustering = false;
+```
+
+### Map-Move-Listener
+
+Movements of the map can be observed by extending the MapView-component and add the MapMoveListener-trait to your MapView:
+
+```php
+class MyMapView extends ESadewater\LivewireMaps\Livewire\MapView {
+    use \ESadewater\LivewireMaps\Traits\MapMoveListener;
+}
+```
+
+Center- or bound-changes can be retrieved by overriding the following functions:
+
+```php
+    public function onCenterChanged(float $lat, float $lng): void
+    {
+        dd($lat, $lng);
+    }
+
+    public function onBoundsChanged(float $neLat, float $neLng, float $swLat, float $swLng): void
+    {
+        dd($neLat, $neLng, $swLat, $swLng);
+    }
+```
+
+This will give you the new position of the map.
 
 ## Testing
 

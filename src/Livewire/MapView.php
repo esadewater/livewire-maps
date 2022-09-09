@@ -21,14 +21,6 @@ class MapView extends Component
 
     public int $zoom;
 
-    public float $neLat;
-
-    public float $neLng;
-
-    public float $swLat;
-
-    public float $swLng;
-
     /**
      * @return void
      */
