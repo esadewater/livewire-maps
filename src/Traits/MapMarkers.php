@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 trait MapMarkers
 {
     public bool $enableClustering = true;
+
     public Collection $markers;
 
     /**
