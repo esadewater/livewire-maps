@@ -3,9 +3,9 @@ import MapMoveListener from "./Features/MoveListener/MapMoveListener";
 
 export default class Map {
 
-    constructor(component) {
-        this.component = component.$wire;
-        this.map = this.initMap(component.el);
+    constructor(component, mapElement) {
+        this.component = component;
+        this.map = this.initMap(mapElement);
         this.loadFeatures();
     }
 
@@ -24,7 +24,6 @@ export default class Map {
 
     loadFeatures() {
         console.log('Load features');
-        console.log(this.component)
 
         if (MapMarkers.isFeatureEnabled(this.component)) {
             new MapMarkers(this.component, this.map);
@@ -33,5 +32,7 @@ export default class Map {
         if (MapMoveListener.isFeatureEnabled(this.component)) {
             new MapMoveListener(this.component, this.map)
         }
+
+        console.log('Finished loading features');
     }
 }
