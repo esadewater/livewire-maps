@@ -1,8 +1,8 @@
 import {MarkerClusterer} from "@googlemaps/markerclusterer";
 import {init} from "./LiveWireMaps";
 
+console.log('init lw maps')
 init();
-
 
 /*
 window.addMarkers = function (map, markers, clickListener) {

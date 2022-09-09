@@ -2,9 +2,11 @@
 
 namespace ESadewater\LivewireMaps;
 
+use ESadewater\LivewireMaps\Livewire\MapView;
+use Illuminate\Support\Facades\Blade;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ESadewater\LivewireMaps\Commands\LivewireMapsCommand;
 
 class LivewireMapsServiceProvider extends PackageServiceProvider
 {
@@ -20,5 +22,15 @@ class LivewireMapsServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasAssets();
+    }
+
+    public function bootingPackage()
+    {
+        parent::bootingPackage();
+
+        Livewire::component('map-view', MapView::class);
+        Blade::directive('livewireMapsScripts', function () {
+            return '{!! ESadewater\LivewireMaps\LivewireMaps::renderScripts() !!}';
+        });
     }
 }

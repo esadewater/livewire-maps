@@ -1,70 +1,38 @@
-import {throttle} from "lodash/function";
-import Marker from "./Marker";
-import {MarkerClusterer} from "@googlemaps/markerclusterer";
+import Marker from "./Features/Markers/Marker";
+import MapMarkers from "./Features/Markers/MapMarkers";
+import MapMoveListener from "./Features/MoveListener/MapMoveListener";
 
 export default class Map {
 
-    LIMIT_RATE = 1000;
-
-    constructor(mapElement) {
-        this.mapElement = mapElement
-        this.liveWireComponent = this.initLiveWire();
-        this.map = this.initMap();
-
-        this.liveWireComponent.on('updatedMarkers', this.onUpdateMarkers.bind(this));
+    constructor(component) {
+        this.component = component;
+        this.map = this.initMap(component.el);
+        this.loadFeatures();
     }
 
-    initMap() {
-        const centerLat = this.liveWireComponent.centerLat,
-            centerLng = this.liveWireComponent.centerLng,
-            zoom = this.liveWireComponent.zoom;
+    initMap(mapElement) {
+        const centerLat = this.component.centerLat,
+            centerLng = this.component.centerLng,
+            zoom = this.component.zoom;
 
         const properties = {
             center: new google.maps.LatLng(parseFloat(centerLat || "0"), parseFloat(centerLng || "0")),
             zoom: parseInt(zoom || "5"),
         };
 
-        const map = new google.maps.Map(this.mapElement, properties);
-
-        map.addListener('center_changed', this.onCenterMove.bind(this));
-        map.addListener('bounds_changed', this.onBoundsMove.bind(this))
-
-        return map;
+        return new google.maps.Map(mapElement, properties);
     }
 
-    initLiveWire() {
-        const liveWireComponentId = this.mapElement.dataset.lwMapId;
+    loadFeatures() {
+        console.log('Load features');
+        console.log(this.component);
 
-        return Livewire.find(liveWireComponentId)
-    }
-
-    onCenterMove = throttle(function () {
-        const center = this.map.getCenter();
-
-        this.liveWireComponent.onCenterChanged(center.lat(), center.lng());
-    }, this.LIMIT_RATE);
-
-    onBoundsMove = throttle(function () {
-        const bounds = this.map.getBounds()
-        const northEast = bounds.getNorthEast();
-        const southWest = bounds.getSouthWest();
-
-        this.liveWireComponent.onBoundsChanged(northEast.lat(), northEast.lng(), southWest.lat(), southWest.lng());
-    }, this.LIMIT_RATE);
-
-    onUpdateMarkers = function() {
-        if (this.mapMarkers) {
-            for (const mapMarker of this.mapMarkers) {
-                mapMarker.delete();
-            }
+        if (MapMarkers.isFeatureEnabled(this.component)) {
+            new MapMarkers(this.component, this.map);
         }
 
-        for (const marker of this.liveWireComponent.markers) {
-
+        if (MapMoveListener.isFeatureEnabled(this.component)) {
+            new MapMoveListener(this.component, this.map)
         }
-        const markers = this.liveWireComponent.markers;
-        this.mapMarkers = markers.map((marker) => new Marker(this.map, this.liveWireComponent, marker));
-
-        //new MarkerClusterer({map, mapMarkers});
     }
 }

@@ -1,19 +1,28 @@
 import Map from "./Map";
 
+const GOOGLE_MAPS_LOAD_EVENT = 'googleMapsLoaded';
+const LIVEWIRE_COMPONENT_LOAD_EVENT = 'component.initialized';
+const LIVEWIRE_LIBRARY_LOAD_EVENT = 'livewire:load';
+
+let GOOGLE_MAPS_LOADED = false
+let LIVEWIRE_LIBRARY_LOADED = false;
+
 export function init() {
-    window.initGoogleMaps = function () {
-        const mapEvent = new Event('mapsReady');
+    window.initLivewireMaps = function () {
+        GOOGLE_MAPS_LOADED = true;
+
+        const mapEvent = new Event(GOOGLE_MAPS_LOAD_EVENT);
         document.dispatchEvent(mapEvent);
     }
 
-    const liveWireLoad = new Promise((resolve) => document.addEventListener('livewire:load', resolve, false));
-    const mapsLoad = new Promise((resolve) => document.addEventListener('mapsReady', resolve, false));
+    Livewire.hook(LIVEWIRE_COMPONENT_LOAD_EVENT, (component) => {
 
-    Promise.all([liveWireLoad, mapsLoad]).then(function () {
-        const lwMaps = document.getElementsByClassName('lw-map');
-
-        for (const mapElement of lwMaps) {
-            new Map(mapElement);
+        if (GOOGLE_MAPS_LOADED)
+            new Map(component);
+        else {
+            document.addEventListener(GOOGLE_MAPS_LOAD_EVENT, function () {
+                new Map(component);
+            })
         }
-    });
+    })
 }
