@@ -12,10 +12,10 @@ class Marker implements JsonSerializable
 
     public mixed $payload;
 
-    public function __construct(mixed $payload = '')
+    public function __construct(float $lat, float $lng, mixed $payload = '')
     {
-        $this->lat = rand(0, 50);
-        $this->lng = rand(0, 50);
+        $this->lat = $lat;
+        $this->lng = $lng;
 
         $this->payload = $payload;
     }

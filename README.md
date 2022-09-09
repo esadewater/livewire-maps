@@ -118,7 +118,11 @@ Center- or bound-changes can be retrieved by overriding the following functions:
     }
 ```
 
-This will give you the new position of the map.
+This will give you the new position of the map. The rate at which the movements will be detected can be adjusted in ms by setting "rateLimit". Default is 1000ms:
+
+```php
+public int $rateLimit = 1000;
+```
 
 ## Testing
 

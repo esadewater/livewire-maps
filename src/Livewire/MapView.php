@@ -10,9 +10,6 @@ use Livewire\Component;
 
 class MapView extends Component
 {
-    //use MapMoveListener;
-    use MapMarkers;
-
     public Collection $features;
 
     public float $centerLat;
