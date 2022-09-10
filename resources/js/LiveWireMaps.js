@@ -14,6 +14,10 @@ export function init() {
     }
 
     Livewire.hook(LIVEWIRE_COMPONENT_LOAD_EVENT, (component) => {
+
+        if (!component.el.classList.contains('livewire-map'))
+            return;
+
         if (GOOGLE_MAPS_LOADED) {
             createMap(component)
         } else {
