@@ -21,7 +21,7 @@ php artisan vendor:publish --tag="livewire-maps-assets"
 Alternatively you can include the JavaScript resources in your app.js:
 
 ```javascript
-const {init} = require("../../packages/livewire-maps/resources/js/LiveWireMaps");
+const {init} = require("../../vendor/esadewater/livewire-maps/resources/js/LiveWireMaps");
 init();
 ```
 
