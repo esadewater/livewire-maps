@@ -1,10 +1,13 @@
 {
     "name": "esadewater/livewire-maps",
-    "description": "This is my package livewire-maps",
+    "description": "Laravel Livewire-Maps",
     "keywords": [
         "esadewater",
         "laravel",
-        "livewire-maps"
+        "livewire",
+        "livewire-component",
+        "livewire-maps",
+        "maps"
     ],
     "homepage": "https://github.com/esadewater/livewire-maps",
     "license": "MIT",
