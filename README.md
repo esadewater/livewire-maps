@@ -1,4 +1,4 @@
-# This is my package livewire-maps
+# Livewire-Maps
 
 Basic Google Maps-implementation for Laravel-Livewire currently supporting:
 - Map-Markers ([view docs](./docs/MapMarkers.md))
