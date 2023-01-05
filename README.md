@@ -6,6 +6,9 @@ Basic Google Maps-implementation for Laravel-Livewire currently supporting:
 - Map-Markers ([view docs](./docs/MapMarkers.md))
 - Map-Move-Listeners ([view docs](./docs/MapMoveListener.md))
 
+## Example
+You can find an example here: [esadewater/livewire-maps-sample](https://github.com/esadewater/livewire-maps-sample)
+
 ## Installation
 
 You can install the package via composer:
